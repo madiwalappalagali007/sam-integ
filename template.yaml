@@ -95,8 +95,6 @@ Resources:
       RestApiId: !Ref AppApi
       ResourceId: !GetAtt AppApi.RootResourceId
       HttpMethod: GET
-      AuthorizationType: CUSTOM
-      AuthorizerId: !Ref BasicAuthorizerFunction.Arn
       Auth:
         DefaultAuthorizer: MyLambdaTokenAuthorizer
         Authorizers: 
@@ -106,7 +104,8 @@ Resources:
       Integration:
         Type: HTTP
         IntegrationHttpMethod: GET
-        Uri:  !Sub "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOriginAccessIdentity}"#specify the endpoint of cloudfront configured
+        Uri:  !Sub "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOriginAccessIdentity}"
+        #specify the endpoint of cloudfront configured
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
